@@ -246,7 +246,7 @@ message MsgUpdateCookbookResponse {
 }
 
 message MsgRegisterKYCAddress {
-  string creator = 1;
+  string account_addr = 1;
   string username = 2;
   uint64 level = 3;
   string provider = 4;

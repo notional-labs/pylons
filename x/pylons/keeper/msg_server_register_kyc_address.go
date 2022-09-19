@@ -11,7 +11,7 @@ import (
 func (k msgServer) RegisterKYCAddress(goCtx context.Context, msg *types.MsgRegisterKYCAddress) (*types.MsgRegisterKYCAddressResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	addr, err := sdk.AccAddressFromBech32(msg.Creator)
+	addr, err := sdk.AccAddressFromBech32(msg.AccountAddr)
 	if err != nil {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "unable to derive address from bech32 string")
 	}
@@ -22,7 +22,7 @@ func (k msgServer) RegisterKYCAddress(goCtx context.Context, msg *types.MsgRegis
 	}
 
 	kycAcc := types.KYCAccount{
-		AccountAddr: msg.Creator,
+		AccountAddr: msg.AccountAddr,
 		Username:    msg.Username,
 		Level:       msg.Level,
 		Provider:    msg.Provider,
@@ -34,14 +34,14 @@ func (k msgServer) RegisterKYCAddress(goCtx context.Context, msg *types.MsgRegis
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "kyc account has been registered")
 	}
 
-	if k.HasAccountAddr(ctx, types.AccountAddr{Value: msg.Creator}) {
+	if k.HasAccountAddr(ctx, types.AccountAddr{Value: msg.AccountAddr}) {
 		k.SetPylonsKYC(ctx, kycAcc)
 	} else {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "kyc account address not found")
 	}
 
 	err = ctx.EventManager().EmitTypedEvent(&types.EventRegisterKYCAccount{
-		Address:    msg.Creator,
+		Address:    msg.AccountAddr,
 		Username:   msg.Username,
 		Level:      msg.Level,
 		Provider:   msg.Provider,

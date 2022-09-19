@@ -7,13 +7,13 @@ import (
 
 var _ sdk.Msg = &MsgRegisterKYCAddress{}
 
-func NewsgRegisterKYCAddress(creator, username, provider, providerID string, level uint64) *MsgRegisterKYCAddress {
+func NewsgRegisterKYCAddress(accountAddr, username, provider, providerID string, level uint64) *MsgRegisterKYCAddress {
 	return &MsgRegisterKYCAddress{
-		Creator:    creator,
-		Username:   username,
-		Level:      level,
-		Provider:   provider,
-		ProviderId: providerID,
+		AccountAddr: accountAddr,
+		Username:    username,
+		Level:       level,
+		Provider:    provider,
+		ProviderId:  providerID,
 	}
 }
 
@@ -26,7 +26,7 @@ func (msg *MsgRegisterKYCAddress) Type() string {
 }
 
 func (msg *MsgRegisterKYCAddress) GetSigners() []sdk.AccAddress {
-	creator, err := sdk.AccAddressFromBech32(msg.Creator)
+	creator, err := sdk.AccAddressFromBech32(msg.AccountAddr)
 	if err != nil {
 		panic(err)
 	}
@@ -40,7 +40,7 @@ func (msg *MsgRegisterKYCAddress) GetSignBytes() []byte {
 
 func (msg *MsgRegisterKYCAddress) ValidateBasic() error {
 	// Validate Sender and receiver addresses
-	_, err := sdk.AccAddressFromBech32(msg.Creator)
+	_, err := sdk.AccAddressFromBech32(msg.AccountAddr)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
