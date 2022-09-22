@@ -2,6 +2,7 @@ package v4_test
 
 import (
 	"testing"
+	"time"
 
 	"github.com/Pylons-tech/pylons/app"
 	v4 "github.com/Pylons-tech/pylons/app/upgrades/v4"
@@ -17,21 +18,21 @@ func noOpAnteDecorator() sdk.AnteHandler {
 	}
 }
 
-func createTestContext(t *testing.T) sdk.Context {
+func createTestContext() (sdk.Context, app.PylonsApp) {
 	pylonsApp := app.Setup(false)
 
-	ctx := pylonsApp.BaseApp.NewContext(false, tmproto.Header{})
-	return ctx
+	ctx := pylonsApp.BaseApp.NewContext(false, tmproto.Header{Height: 1, ChainID: "pylons-1", Time: time.Now().UTC()})
+	return ctx, *pylonsApp
 }
 
 func TestMsgRestrictUbedrockDecorator(t *testing.T) {
-	handler := v4.MsgRestrictUbedrockDecorator{}
+	ctx, pylonsApp := createTestContext()
+	handler := v4.NewMsgRestrictUbedrockDecorator(pylonsApp.PylonsKeeper)
 	txCfg := app.MakeEncodingConfig().TxConfig
 
 	addr1 := sdk.AccAddress([]byte("address1---------------"))
 	addr2 := sdk.AccAddress([]byte("address2---------------"))
 
-	ctx := createTestContext(t)
 	testCases := []struct {
 		name      string
 		ctx       sdk.Context

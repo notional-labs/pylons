@@ -14,6 +14,12 @@ type MsgRestrictUbedrockDecorator struct {
 	pk pylonskeeper.Keeper
 }
 
+func NewMsgRestrictUbedrockDecorator(pk pylonskeeper.Keeper) MsgRestrictUbedrockDecorator {
+	return MsgRestrictUbedrockDecorator{
+		pk:              pk,
+	}
+}
+
 // AnteDecorator for restrict ubedrock denom used by unallowed address
 func (ad MsgRestrictUbedrockDecorator) AnteHandle(ctx sdk.Context, tx sdk.Tx, simulate bool, next sdk.AnteHandler) (sdk.Context, error) {
 	sigTx, ok := tx.(authsigning.SigVerifiableTx)
