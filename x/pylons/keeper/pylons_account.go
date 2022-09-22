@@ -1,6 +1,8 @@
 package keeper
 
 import (
+	"fmt"
+
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
@@ -65,8 +67,9 @@ func (k Keeper) SetPylonsKYC(ctx sdk.Context, kycaccount types.KYCAccount) {
 
 // GetPylonsKYC returns an types.KYCAccount corresponding to its AccountAddr
 func (k Keeper) GetPylonsKYC(ctx sdk.Context, kycaddr string) (val types.KYCAccount, found bool) {
+	fmt.Printf("[LOG] GetPylonsKYC - ctx: %v\nk.storeKey: %v\n", ctx, k.storeKey)
 	kycaccPrefixStore := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.KYCAccountKey))
-
+	fmt.Printf("[LOG] GetPylonsKYC 11111111111\n")
 	b := kycaccPrefixStore.Get(types.KeyPrefix(kycaddr))
 	if b == nil {
 		return val, false

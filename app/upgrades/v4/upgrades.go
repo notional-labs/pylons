@@ -3,6 +3,7 @@ package v4
 import (
 	"cosmossdk.io/math"
 	"github.com/Pylons-tech/pylons/x/pylons/types"
+	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	authkeeper "github.com/cosmos/cosmos-sdk/x/auth/keeper"
@@ -69,16 +70,21 @@ func CreateUpgradeHandler(
 	bankKeeper bankkeeper.Keeper,
 	accKeeper *authkeeper.AccountKeeper,
 	staking *stakingkeeper.Keeper,
+	pylonStoreKey storetypes.StoreKey,
 ) upgradetypes.UpgradeHandler {
 	return func(ctx sdk.Context, plan upgradetypes.Plan, fromVM module.VersionMap) (module.VersionMap, error) {
 		// logger := ctx.Logger()
 
+		pylonStoreKey = sdk.NewKVStoreKey(
+			types.StoreKey,
+		)
 		if types.IsMainnet(ctx.ChainID()) {
 			// TODO: Logic upgadeHandler
 			bankBaseKeeper, _ := bankKeeper.(bankkeeper.BaseKeeper)
 			BurnToken(ctx, types.StakingCoinDenom, accKeeper, &bankBaseKeeper, staking)
 			BurnToken(ctx, types.StripeCoinDenom, accKeeper, &bankBaseKeeper, staking)
 			MintUbedrockForInitialAccount(ctx, &bankBaseKeeper, staking)
+
 		}
 		return mm.RunMigrations(ctx, configurator, fromVM)
 	}
