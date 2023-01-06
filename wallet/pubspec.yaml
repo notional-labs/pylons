@@ -142,7 +142,7 @@ dependencies:
   focus_detector: ^2.0.1
 
   qr_flutter: ^4.0.0
-  image: ^3.2.0
+  image: ^4.0.7
 
   home_widget: ^0.1.6
 
