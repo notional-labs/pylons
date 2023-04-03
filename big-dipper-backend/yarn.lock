@@ -326,13 +326,22 @@
     rxjs "6"
     semver "^7.3.5"
 
+"@ledgerhq/devices@^8.0.1":
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/devices/-/devices-8.0.1.tgz#4c475f6ae249daf00ef08f5098924206233f3179"
+  dependencies:
+    "@ledgerhq/errors" "^6.12.4"
+    "@ledgerhq/logs" "^6.10.1"
+    rxjs "6"
+    semver "^7.3.5"
+
 "@ledgerhq/errors@^5.50.0":
   version "5.50.0"
   resolved "https://registry.npmjs.org/@ledgerhq/errors/-/errors-5.50.0.tgz"
 
-"@ledgerhq/errors@^6.11.1":
-  version "6.11.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/errors/-/errors-6.11.1.tgz#a8a81bda6d28ac43c757e109b1ff079ddeec54a6"
+"@ledgerhq/errors@^6.11.1", "@ledgerhq/errors@^6.12.4":
+  version "6.12.4"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/errors/-/errors-6.12.4.tgz#1c2f75dc3dee91b069f3446be484fa28676d1b45"
 
 "@ledgerhq/hw-transport-web-ble@^6.27.6":
   version "6.27.6"
@@ -344,13 +353,13 @@
     "@ledgerhq/logs" "^6.10.1"
     rxjs "6"
 
-"@ledgerhq/hw-transport-webusb@^6.27.6":
-  version "6.27.6"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-webusb/-/hw-transport-webusb-6.27.6.tgz#8c4b5f96419511e3d8159e01baefd52891a91ae1"
+"@ledgerhq/hw-transport-webusb@^6.27.13":
+  version "6.27.13"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-webusb/-/hw-transport-webusb-6.27.13.tgz#272c38aad7d090c748f6c7fd85e5a579aa1bbae4"
   dependencies:
-    "@ledgerhq/devices" "^7.0.3"
-    "@ledgerhq/errors" "^6.11.1"
-    "@ledgerhq/hw-transport" "^6.27.6"
+    "@ledgerhq/devices" "^8.0.1"
+    "@ledgerhq/errors" "^6.12.4"
+    "@ledgerhq/hw-transport" "^6.28.2"
     "@ledgerhq/logs" "^6.10.1"
 
 "@ledgerhq/hw-transport@^5.25.0":
@@ -361,12 +370,12 @@
     "@ledgerhq/errors" "^5.50.0"
     events "^3.3.0"
 
-"@ledgerhq/hw-transport@^6.27.6":
-  version "6.27.6"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-6.27.6.tgz#87f886591bad047c18e76920519aceb9d844667b"
+"@ledgerhq/hw-transport@^6.27.6", "@ledgerhq/hw-transport@^6.28.2":
+  version "6.28.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-6.28.2.tgz#483f9a39403ee63b03d452e30bfe8189dcca5785"
   dependencies:
-    "@ledgerhq/devices" "^7.0.3"
-    "@ledgerhq/errors" "^6.11.1"
+    "@ledgerhq/devices" "^8.0.1"
+    "@ledgerhq/errors" "^6.12.4"
     events "^3.3.0"
 
 "@ledgerhq/logs@^5.50.0":
